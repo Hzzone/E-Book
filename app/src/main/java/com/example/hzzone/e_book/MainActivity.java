@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 //    private ImageView iv;
     private String URL = "http://www.biqukan.com/";
     private static final String TAG = "MainActivity";
+    private Bookinfo book;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,29 +34,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Vector<Bookinfo> books = new Vector<>();
-        Bookinfo book = null;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                book = Content.getBookinfo(URL, "一念永恒");
-                Log.d(TAG, "run: ");
-                
-            }
-        })
-        books.add(Content.getBookinfo(URL, "一念永恒"));
-        books.add(Content.getBookinfo(URL, "大泼猴"));
-        books.add(Content.getBookinfo(URL, "奋斗在红楼"));
-        books.add(Content.getBookinfo(URL, "文娱教父"));
-        books.add(Content.getBookinfo(URL, "文娱教父"));
-        books.add(Content.getBookinfo(URL, "文娱教父"));
-        books.add(Content.getBookinfo(URL, "文娱教父"));
-        books.add(Content.getBookinfo(URL, "文娱教父"));
-        books.add(Content.getBookinfo(URL, "文娱教父"));
-        books.add(Content.getBookinfo(URL, "文娱教父"));
-        books.add(Content.getBookinfo(URL, "文娱教父"));
-        books.add(Content.getBookinfo(URL, "文娱教父"));
-        books.add(Content.getBookinfo(URL, "文娱教父"));
-        books.add(Content.getBookinfo(URL, "文娱教父"));
+        for(int i=0;i<15;i++){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    book = Content.getBookinfo(URL, "一念永恒");
+                    Log.d(TAG, "run: succcess");
+                }
+            }).start();
+            books.add(book);
+        }
         BookinfoAdapter adapter = new BookinfoAdapter(MainActivity.this,
                 R.layout.bookinfo, books);
         ListView bookshelf_list = (ListView)findViewById(R.id.bookshelf_list);
