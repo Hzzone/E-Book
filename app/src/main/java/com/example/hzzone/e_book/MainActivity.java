@@ -30,10 +30,12 @@ public class MainActivity extends AppCompatActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        Content.getChapterList("http://www.biqukan.com/", "http://www.biqukan.com/1_1094/");
+//                        Content.getChapterList("http://www.biqukan.com/", "http://www.biqukan.com/1_1094/");
 //                        OkHttpClient client = new OkHttpClient();
 //                        Request request = new Request.Builder().url("http://www.biqukan.com/1_1094/13404452.html").build();
 //                        Response response = null;
+                        Content.getChapterContent("http://www.biqukan.com/",
+                                "http://www.biqukan.com/1_1094/13170873.html");
                     }
                 }).start();
             }
