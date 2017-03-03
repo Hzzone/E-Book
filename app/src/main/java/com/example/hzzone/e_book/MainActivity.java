@@ -1,5 +1,6 @@
 package com.example.hzzone.e_book;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ListViewCompat;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,58 +28,14 @@ public class MainActivity extends AppCompatActivity {
 //    private ImageView iv;
     private String URL = "http://www.biqukan.com/";
     private static final String TAG = "MainActivity";
-    private Bookinfo book;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Vector<Bookinfo> books = new Vector<>();
-        for(int i=0;i<15;i++){
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    book = Content.getBookinfo(URL, "一念永恒");
-                    Log.d(TAG, "run: succcess");
-                }
-            }).start();
-            books.add(book);
-        }
-        BookinfoAdapter adapter = new BookinfoAdapter(MainActivity.this,
-                R.layout.bookinfo, books);
-        ListView bookshelf_list = (ListView)findViewById(R.id.bookshelf_list);
-        bookshelf_list.setAdapter(adapter);
+        new UpadteBooksTask().execute();
 
-//        button = (Button)findViewById(R.id.button);
-//        iv = (ImageView) findViewById(R.id.iv);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d(TAG, "run: 已点击");
-//                new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-////                        Content.getChapterList("http://www.biqukan.com/", "http://www.biqukan.com/1_1094/");
-////                        OkHttpClient client = new OkHttpClient();
-////                        Request request = new Request.Builder().url("http://www.biqukan.com/1_1094/13404452.html").build();
-////                        Response response = null;
-////                        Content.getChapterContent("http://www.biqukan.com/",
-////                                "http://www.biqukan.com/1_1094/13170873.html");
-//                        //测试封面是否爬下来了
-////                        final Bookinfo info = Content.getBookinfo("http://www.biqukan.com/", "一念永恒");
-////                        runOnUiThread(new Runnable() {
-////                            @Override
-////                            public void run() {
-////                                iv.setImageBitmap(info.getPic());
-////                            }
-////                        });
-////                    }
-////                }).start();
-//                    }
-//                });
-//            }
-//        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
@@ -101,6 +59,41 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    class UpadteBooksTask extends AsyncTask<Void, Vector<Bookinfo>, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+//            Bookinfo book = Content.getBookinfo(URL, "一念永恒");
+//            Log.d(TAG, "doInBackground: "+book.getBookIntro());
+            Vector<Bookinfo> books = new Vector<>();
+            books.add(Content.getBookinfo(URL, "一念永恒"));
+            publishProgress(books);
+            if(books.isEmpty()){
+                return false;
+            }else
+                return true;
+        }
+
+        @Override
+        protected void onProgressUpdate(Vector<Bookinfo>... values){
+            BookinfoAdapter adapter = new BookinfoAdapter(MainActivity.this,
+                    R.layout.bookinfo, values[0]);
+//            Log.d(TAG, "onCreate: "+books.get(0).getBookIntro());
+            ListView bookshelf_list = (ListView)findViewById(R.id.bookshelf_list);
+            bookshelf_list.setAdapter(adapter);
+
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result){
+            if(result){
+                Toast.makeText(getApplicationContext(), "update success", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getApplicationContext(), "update failed", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
 
