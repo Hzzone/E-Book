@@ -15,6 +15,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.wyt.searchbox.SearchFragment;
+import com.wyt.searchbox.custom.IOnSearchClickListener;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
@@ -49,10 +52,17 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onOptionsItemSelected: clicked edit");
                 break;
             case R.id.search_item:
-                Log.d(TAG, "onOptionsItemSelected: clicked search");
-                break;
-            case R.id.setting_item:
-                Log.d(TAG, "onOptionsItemSelected: clicked setting");
+//                Log.d(TAG, "onOptionsItemSelected: clicked search");
+                SearchFragment searchFragment = SearchFragment.newInstance();
+                searchFragment.setOnSearchClickListener(new IOnSearchClickListener() {
+                    @Override
+                    public void OnSearchClick(String keyword) {
+                        //这里处理逻辑
+//                        Toast.makeText(MainActivity.this, keyword, Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "OnSearchClick: "+keyword);
+                    }
+                });
+                searchFragment.show(getSupportFragmentManager(),SearchFragment.TAG);
                 break;
             default:
                 Log.d(TAG, "onOptionsItemSelected: clicked nothing");

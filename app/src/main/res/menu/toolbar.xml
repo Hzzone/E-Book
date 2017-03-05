@@ -10,9 +10,5 @@
         android:title="搜索"
         android:icon="@drawable/ic_search_img"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/setting_item"
-        android:title="设置"
-        app:showAsAction="never" />
 
 </menu>
