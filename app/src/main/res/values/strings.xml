@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">E-Book</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_comment">Comment</string>
+    <string name="nav_notification">Notification</string>
+    <string name="nav_settings">settings</string>
 </resources>
