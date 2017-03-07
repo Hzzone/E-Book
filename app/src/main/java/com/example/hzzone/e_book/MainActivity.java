@@ -31,8 +31,6 @@ import okhttp3.*;
 
 public class MainActivity extends AppCompatActivity {
 
-    //    private Button button;
-//    private ImageView iv;
     private String URL = "http://www.biqukan.com/";
     private static final String TAG = "MainActivity";
 
@@ -141,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.action_home:
-                    new UpadteBooksTask().execute();
+                    //TODO 主界面显示书架和更新
                     return true;
                 case R.id.action_comment:
                     //TODO comment界面
@@ -167,12 +165,19 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     try {
                         Thread.sleep(2000);
+                        new UpadteBooksTask().execute();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     Log.d(TAG, "run: 刷新");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            swipeRefreshLayout.setRefreshing(false);
+                        }
+                    });
                 }
-            });
+            }).start();
         }
 
     };
