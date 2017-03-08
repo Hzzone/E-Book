@@ -1,5 +1,6 @@
 package com.example.hzzone.e_book;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
@@ -19,8 +20,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.wyt.searchbox.SearchFragment;
-import com.wyt.searchbox.custom.IOnSearchClickListener;
 
 import java.io.IOException;
 import java.util.List;
@@ -64,15 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onOptionsItemSelected: clicked edit");
                 break;
             case R.id.search_item:
-                SearchFragment searchFragment = SearchFragment.newInstance();
-                searchFragment.setOnSearchClickListener(new IOnSearchClickListener() {
-                    @Override
-                    public void OnSearchClick(String keyword) {
-                        //这里处理逻辑
-                        Log.d(TAG, "OnSearchClick: " + keyword);
-                    }
-                });
-                searchFragment.show(getSupportFragmentManager(), SearchFragment.TAG);
+                startActivity(new Intent(MainActivity.this, SearchActivity.class));
                 break;
             default:
                 Log.d(TAG, "onOptionsItemSelected: clicked nothing");
