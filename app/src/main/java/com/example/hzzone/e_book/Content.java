@@ -141,10 +141,10 @@ public class Content {
         String bookIntro = null;
         Bitmap pic = null;
         Document doc = null;
-        String resarchURL = "http://zhannei.baidu.com/cse/search?q="
+        String researchURL = "http://zhannei.baidu.com/cse/search?q="
                 + bookName + "&click=1&s=2758772450457967865&nsid=";
         try {
-            doc = Jsoup.connect(resarchURL).get();
+            doc = Jsoup.connect(researchURL).get();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -155,10 +155,6 @@ public class Content {
                 Elements ele = doc.getElementsByClass("result-item result-game-item");
                 Element e = ele.get(0); //只取搜索的第一本
                 picURL = e.getElementsByTag("img").attr("src"); //封面的URL
-//                Log.d(TAG, "getBookinfo: " + picURL);
-//                ele = e.getElementsByTag("h3");
-//                bookURL = ele.select("a.result-game-item-title-link").attr("href");
-//                bookIntro = ele.select("p").html();
                 bookURL = ele.select("a.result-game-item-title-link").attr("href");
 
                 bookIntro = ele.select("p.result-game-item-desc").get(0).text();

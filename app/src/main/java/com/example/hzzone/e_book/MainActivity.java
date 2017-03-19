@@ -4,17 +4,24 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 
@@ -25,21 +32,87 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private SwipeRefreshLayout swipeRefreshLayout; //下拉刷新
+    private ViewPager mViewPager = null;
+    BottomNavigationView navigation;
+    private ArrayList<View> mListViews = new ArrayList<>();
+    private View home;
+    private View comment;
+    private View notification;
+    private View settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+        mViewPager = (ViewPager) findViewById(R.id.mViewPager);
+        initViewPager();
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         swipeRefreshLayout.setOnRefreshListener(mOnRefreshListener);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        BottomNavigationView navigation =
+        navigation =
                 (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
+        mViewPager.addOnPageChangeListener(mPageChangeListener);
     }
+
+    void initViewPager(){
+        LayoutInflater mLayoutInflater = LayoutInflater.from(this);
+        home = mLayoutInflater.inflate(R.layout.home, null);
+        comment = mLayoutInflater.inflate(R.layout.comment, null);
+        notification = mLayoutInflater.inflate(R.layout.notification, null);
+        settings = mLayoutInflater.inflate(R.layout.settings, null);
+        swipeRefreshLayout = (SwipeRefreshLayout) home.findViewById(R.id.swipe_refresh);
+        mListViews.add(home);
+        mListViews.add(comment);
+        mListViews.add(notification);
+        mListViews.add(settings);
+        mViewPager.setAdapter(new MyViewPagerAdapter(mListViews));
+    }
+
+    private ViewPager.OnPageChangeListener mPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            View view;
+            switch (position){
+                case 0:
+//                    navigation.setItemTextColor(findViewById(R.color.));
+                    Log.d(TAG, "onPageSelected: 0");
+                    view = navigation.findViewById(R.id.action_home);
+                    view.performClick();
+                    break;
+                case 1:
+                    Log.d(TAG, "onPageSelected: 1");
+                    view = navigation.findViewById(R.id.action_comment);
+                    view.performClick();
+                    break;
+                case 2:
+                    Log.d(TAG, "onPageSelected: 2");
+                    view = navigation.findViewById(R.id.action_notification);
+                    view.performClick();
+                    break;
+                case 3:
+                    Log.d(TAG, "onPageSelected: 3");
+                    view = navigation.findViewById(R.id.action_settings);
+                    view.performClick();
+                    break;
+                default:
+                    Log.d(TAG, "onPageSelected: error!");
+                    break;
+            }
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -122,15 +195,19 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.action_home:
                     //TODO 主界面显示书架和更新
+                    mViewPager.setCurrentItem(0);
                     return true;
                 case R.id.action_comment:
                     //TODO comment界面
+                    mViewPager.setCurrentItem(1);
                     return true;
                 case R.id.action_notification:
                     //TODO Notification界面
+                    mViewPager.setCurrentItem(2);
                     return true;
                 case R.id.action_settings:
                     //TODO Settings界面
+                    mViewPager.setCurrentItem(3);
                     return true;
             }
             return false;
