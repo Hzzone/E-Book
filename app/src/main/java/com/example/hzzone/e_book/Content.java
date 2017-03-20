@@ -186,7 +186,6 @@ public class Content {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        Log.d(TAG, "getBookinfo: "+pic);
         return new Bookinfo(bookName, bookIntro, bookURL, pic);
     }
 }

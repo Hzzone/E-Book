@@ -1,6 +1,9 @@
 package com.example.hzzone.e_book;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -15,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -33,8 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swipeRefreshLayout; //下拉刷新
     private ViewPager mViewPager = null;
-    BottomNavigationView navigation;
+    private BottomNavigationView navigation;
+    //书架
+    private ListView bookshelf_list;
     private ArrayList<View> mListViews = new ArrayList<>();
+    Vector<Bookinfo> books = new Vector<>();
+    BookinfoAdapter adapter;
+    //底部菜单栏
     private View home;
     private View comment;
     private View notification;
@@ -63,6 +72,40 @@ public class MainActivity extends AppCompatActivity {
         notification = mLayoutInflater.inflate(R.layout.notification, null);
         settings = mLayoutInflater.inflate(R.layout.settings, null);
         swipeRefreshLayout = (SwipeRefreshLayout) home.findViewById(R.id.swipe_refresh);
+        bookshelf_list = (ListView) home.findViewById(R.id.bookshelf_list);
+
+        books.clear();
+        // 测试书架
+        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
+        adapter = new BookinfoAdapter(MainActivity.this,
+                R.layout.bookinfo, books);
+        bookshelf_list.setAdapter(adapter);
+        bookshelf_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(MainActivity.this, books.get(position).getBookName(), Toast.LENGTH_LONG).show();
+                Bookinfo book = books.get(position);
+                Intent intent = new Intent(MainActivity.this, ReadingActivity.class);
+                intent.putExtra("book_intro", book.getBookIntro());
+                intent.putExtra("book_name", book.getBookName());
+                intent.putExtra("book_url", book.getBookURL());
+                startActivity(intent);
+            }
+        });
+
         mListViews.add(home);
         mListViews.add(comment);
         mListViews.add(notification);
@@ -144,7 +187,6 @@ public class MainActivity extends AppCompatActivity {
         //TODO 书架的数据库存取和小说更新的爬取
         @Override
         protected Boolean doInBackground(Void... params) {
-            Vector<Bookinfo> books = new Vector<>();
             Bookinfo book = Content.getBookinfo(URL, "一念永恒");
             books.add(book);
             books.add(new Bookinfo("1", "2", "1", book.getPic()));
@@ -166,11 +208,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onProgressUpdate(Vector<Bookinfo>... values) {
-            BookinfoAdapter adapter = new BookinfoAdapter(MainActivity.this,
-                    R.layout.bookinfo, values[0]);
-//            Log.d(TAG, "onCreate: "+books.get(0).getBookIntro());
-            ListView bookshelf_list = (ListView) findViewById(R.id.bookshelf_list);
-            bookshelf_list.setAdapter(adapter);
+            adapter.addAll(values[0]);
 
         }
 
