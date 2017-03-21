@@ -76,20 +76,23 @@ public class MainActivity extends AppCompatActivity {
 
         books.clear();
         // 测试书架
-        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
-        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
-        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
-        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
-        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
-        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
-        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
-        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
-        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
-        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
-        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
-        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
-        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
-        books.add(new Bookinfo("1", "2", "1", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
+        books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", BitmapFactory.decodeFile("test.jpg")));
         adapter = new BookinfoAdapter(MainActivity.this,
                 R.layout.bookinfo, books);
         bookshelf_list.setAdapter(adapter);
@@ -189,16 +192,16 @@ public class MainActivity extends AppCompatActivity {
         protected Boolean doInBackground(Void... params) {
             Bookinfo book = Content.getBookinfo(URL, "一念永恒");
             books.add(book);
-            books.add(new Bookinfo("1", "2", "1", book.getPic()));
-            books.add(new Bookinfo("2", "2", "1", book.getPic()));
-            books.add(new Bookinfo("3", "2", "1", book.getPic()));
-            books.add(new Bookinfo("3", "2", "1", book.getPic()));
-            books.add(new Bookinfo("4", "2", "1", book.getPic()));
-            books.add(new Bookinfo("5", "2", "1", book.getPic()));
-            books.add(new Bookinfo("6", "2", "1", book.getPic()));
-            books.add(new Bookinfo("7", "2", "1", book.getPic()));
-            books.add(new Bookinfo("8", "2", "1", book.getPic()));
-            books.add(new Bookinfo("9", "2", "1", book.getPic()));
+            books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", book.getPic()));
+            books.add(new Bookinfo("2", "2", "http://www.biqukan.com/1_1094/", book.getPic()));
+            books.add(new Bookinfo("3", "2", "http://www.biqukan.com/1_1094/", book.getPic()));
+            books.add(new Bookinfo("3", "2", "http://www.biqukan.com/1_1094/", book.getPic()));
+            books.add(new Bookinfo("4", "2", "http://www.biqukan.com/1_1094/", book.getPic()));
+            books.add(new Bookinfo("5", "2", "http://www.biqukan.com/1_1094/", book.getPic()));
+            books.add(new Bookinfo("6", "2", "http://www.biqukan.com/1_1094/", book.getPic()));
+            books.add(new Bookinfo("7", "2", "http://www.biqukan.com/1_1094/", book.getPic()));
+            books.add(new Bookinfo("8", "2", "http://www.biqukan.com/1_1094/", book.getPic()));
+            books.add(new Bookinfo("9", "2", "http://www.biqukan.com/1_1094/", book.getPic()));
             publishProgress(books);
             if (books.isEmpty()) {
                 return false;
