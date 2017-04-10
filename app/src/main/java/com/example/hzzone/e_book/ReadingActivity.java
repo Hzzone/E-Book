@@ -19,7 +19,6 @@ public class ReadingActivity extends AppCompatActivity {
         reading_text = (TextView) findViewById(R.id.reading_text);
         Intent intent = getIntent();
         String URL = intent.getStringExtra("book_url");
-        Log.d(TAG, "onCreate: "+URL);
         new ReadingTask().execute();
     }
 
@@ -30,6 +29,7 @@ public class ReadingActivity extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
             String text =
                     Content.getChapterContent("http://www.biqukan.com/", "http://www.biqukan.com/1_1094/13662709.html").values().toString();
+            deleteCRLFOnce(text);
             Log.d(TAG, "doInBackground: "+text);
             publishProgress(text);
             return null;
@@ -38,5 +38,12 @@ public class ReadingActivity extends AppCompatActivity {
             reading_text.setText(values[0]);
             reading_text.setMovementMethod(ScrollingMovementMethod.getInstance());
         }
+
+    }
+    private static String deleteCRLFOnce(String input) {
+
+        input.replace("&nbsp;", "");
+        return input.replaceAll("((\r\n)|\n)[\\s\t ]*(\\1)+", "$1");
+
     }
 }
