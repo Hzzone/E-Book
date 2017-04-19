@@ -1,0 +1,345 @@
+@font-face {
+  font-family: 'mb-icon';
+  src:  url('fonts/mb-icon.eot?jsqti6');
+  src:  url('fonts/mb-icon.eot?jsqti6#iefix') format('embedded-opentype'),
+    url('fonts/mb-icon.ttf?jsqti6') format('truetype'),
+    url('fonts/mb-icon.woff?jsqti6') format('woff'),
+    url('fonts/mb-icon.svg?jsqti6#mb-icon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'mb-icon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cog:before {
+  content: "\e95b";
+}
+.icon-design:before {
+  content: "\e95c";
+}
+.icon-gesture-down:before {
+  content: "\e95d";
+}
+.icon-gesture-dtap:before {
+  content: "\e95e";
+}
+.icon-gesture-hold:before {
+  content: "\e95f";
+}
+.icon-gesture-left:before {
+  content: "\e960";
+}
+.icon-gesture-right:before {
+  content: "\e961";
+}
+.icon-gesture-tap:before {
+  content: "\e962";
+}
+.icon-gesture-timer:before {
+  content: "\e963";
+}
+.icon-gesture-up:before {
+  content: "\e964";
+}
+.icon-link:before {
+  content: "\e965";
+}
+.icon-lock-o:before {
+  content: "\e966";
+}
+.icon-minus:before {
+  content: "\e967";
+}
+.icon-proto:before {
+  content: "\e968";
+}
+.icon-unlock-o:before {
+  content: "\e969";
+}
+.icon-align-h-center:before {
+  content: "\e900";
+}
+.icon-align-h-left:before {
+  content: "\e901";
+}
+.icon-align-h-right:before {
+  content: "\e902";
+}
+.icon-align-v-bottom:before {
+  content: "\e903";
+}
+.icon-align-v-middle:before {
+  content: "\e904";
+}
+.icon-align-v-top:before {
+  content: "\e905";
+}
+.icon-arrow-bottom:before {
+  content: "\e906";
+}
+.icon-arrow-left:before {
+  content: "\e907";
+}
+.icon-arrow-right:before {
+  content: "\e908";
+}
+.icon-arrow-top:before {
+  content: "\e909";
+}
+.icon-border:before {
+  content: "\e90a";
+}
+.icon-cloud:before {
+  content: "\e90b";
+}
+.icon-comment:before {
+  content: "\e90c";
+}
+.icon-cube:before {
+  content: "\e90d";
+}
+.icon-cubes:before {
+  content: "\e90e";
+}
+.icon-cut:before {
+  content: "\e90f";
+}
+.icon-distribute-h:before {
+  content: "\e910";
+}
+.icon-distribute-v:before {
+  content: "\e911";
+}
+.icon-duplicate:before {
+  content: "\e912";
+}
+.icon-exchange:before {
+  content: "\e913";
+}
+.icon-export:before {
+  content: "\e914";
+}
+.icon-eye:before {
+  content: "\e915";
+}
+.icon-font:before {
+  content: "\e916";
+}
+.icon-grid:before {
+  content: "\e917";
+}
+.icon-group:before {
+  content: "\e918";
+}
+.icon-img:before {
+  content: "\e919";
+}
+.icon-keyboard:before {
+  content: "\e91a";
+}
+.icon-layer:before {
+  content: "\e91b";
+}
+.icon-layout:before {
+  content: "\e91c";
+}
+.icon-lock:before {
+  content: "\e91d";
+}
+.icon-paste:before {
+  content: "\e91e";
+}
+.icon-play:before {
+  content: "\e91f";
+}
+.icon-plus-o:before {
+  content: "\e920";
+}
+.icon-plus:before {
+  content: "\e921";
+}
+.icon-question:before {
+  content: "\e922";
+}
+.icon-recycle:before {
+  content: "\e923";
+}
+.icon-redo:before {
+  content: "\e924";
+}
+.icon-rotate:before {
+  content: "\e925";
+}
+.icon-ruler:before {
+  content: "\e926";
+}
+.icon-save:before {
+  content: "\e927";
+}
+.icon-search:before {
+  content: "\e928";
+}
+.icon-shadow:before {
+  content: "\e929";
+}
+.icon-smiley:before {
+  content: "\e92a";
+}
+.icon-state:before {
+  content: "\e92b";
+}
+.icon-t-align-center:before {
+  content: "\e92c";
+}
+.icon-t-align-left:before {
+  content: "\e92d";
+}
+.icon-t-align-right:before {
+  content: "\e92e";
+}
+.icon-t-align-v-bottom:before {
+  content: "\e92f";
+}
+.icon-t-align-v-middle:before {
+  content: "\e930";
+}
+.icon-t-align-v-top:before {
+  content: "\e931";
+}
+.icon-t-bold:before {
+  content: "\e932";
+}
+.icon-t-italic:before {
+  content: "\e933";
+}
+.icon-t-strikethrough:before {
+  content: "\e934";
+}
+.icon-t-underline:before {
+  content: "\e935";
+}
+.icon-template:before {
+  content: "\e936";
+}
+.icon-trash-can:before {
+  content: "\e937";
+}
+.icon-undo:before {
+  content: "\e938";
+}
+.icon-ungroup:before {
+  content: "\e939";
+}
+.icon-wechat-moment:before {
+  content: "\e93a";
+}
+.icon-widget-bar:before {
+  content: "\e93b";
+}
+.icon-widget-battery:before {
+  content: "\e93c";
+}
+.icon-widget-btn:before {
+  content: "\e93d";
+}
+.icon-widget-checkbox:before {
+  content: "\e93e";
+}
+.icon-widget-circle:before {
+  content: "\e93f";
+}
+.icon-widget-file:before {
+  content: "\e940";
+}
+.icon-widget-footer:before {
+  content: "\e941";
+}
+.icon-widget-gesture:before {
+  content: "\e942";
+}
+.icon-widget-header:before {
+  content: "\e943";
+}
+.icon-widget-horizontal-line:before {
+  content: "\e944";
+}
+.icon-widget-icon-label:before {
+  content: "\e945";
+}
+.icon-widget-img:before {
+  content: "\e946";
+}
+.icon-widget-input:before {
+  content: "\e947";
+}
+.icon-widget-keyboard:before {
+  content: "\e948";
+}
+.icon-widget-link:before {
+  content: "\e949";
+}
+.icon-widget-map:before {
+  content: "\e94a";
+}
+.icon-widget-paragraph:before {
+  content: "\e94b";
+}
+.icon-widget-radio:before {
+  content: "\e94c";
+}
+.icon-widget-rectangle:before {
+  content: "\e94d";
+}
+.icon-widget-search-input:before {
+  content: "\e94e";
+}
+.icon-widget-select:before {
+  content: "\e94f";
+}
+.icon-widget-sticker:before {
+  content: "\e950";
+}
+.icon-widget-text:before {
+  content: "\e951";
+}
+.icon-widget-textarea:before {
+  content: "\e952";
+}
+.icon-widget-toggle:before {
+  content: "\e953";
+}
+.icon-widget-tooltip:before {
+  content: "\e954";
+}
+.icon-widget-triangle-left-bottom:before {
+  content: "\e955";
+}
+.icon-widget-triangle-top:before {
+  content: "\e956";
+}
+.icon-widget-vertical-line:before {
+  content: "\e957";
+}
+.icon-widget-webpage:before {
+  content: "\e958";
+}
+.icon-zoom-in:before {
+  content: "\e959";
+}
+.icon-zoom-out:before {
+  content: "\e95a";
+}
+
