@@ -4,4 +4,8 @@
     <string name="nav_comment">Comment</string>
     <string name="nav_notification">Notification</string>
     <string name="nav_settings">settings</string>
+    <string name="readingbottom1">夜间</string>
+    <string name="readingbottom2">缩小</string>
+    <string name="readingbottom3">放大</string>
+    <string name="readingbottom4">目录</string>
 </resources>

@@ -1,7 +1,10 @@
 package com.example.hzzone.e_book;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.VectorDrawable;
 import android.hardware.camera2.params.StreamConfigurationMap;
+
+import java.util.Map;
 
 /**
  * Created by Hzzone on 2017/3/2.
@@ -12,6 +15,7 @@ public class Bookinfo {
     private String bookIntro;
     private String bookURL;
     private Bitmap pic;
+    private Map<String, String> Chapter;
     public Bookinfo(String bookName, String bookIntro,String bookURL, Bitmap pic){
         this.bookName = bookName;
         this.bookIntro = bookIntro;
@@ -43,4 +47,11 @@ public class Bookinfo {
         return pic;
     }
 
+    public Map<String, String> getChapter() {
+        return Chapter;
+    }
+
+    public void setChapter(Map<String, String> chapter) {
+        Chapter = chapter;
+    }
 }
