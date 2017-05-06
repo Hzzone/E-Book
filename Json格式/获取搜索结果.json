@@ -1,0 +1,46 @@
+{
+ "code":1,
+ "message":"ok",
+ "data":{
+ "books":[
+ {
+ "_id":"50864bf69dacd30e3a000014",
+ "hasCp":true,
+ "title":"遮天",
+ "cat":"仙侠",
+ "author":"辰东",
+ "site":"zhuishuvip",
+ "cover":"/agent/http://image.cmfu.com/books/1735921/1735921.jpg",
+ "shortIntro":"冰冷与黑暗并存的宇宙深处，九具庞大的龙尸拉着一口青铜古棺，亘古长存。 这是太空探测器在枯寂的宇宙中捕捉到的一幅极其震撼的画面。 九龙拉棺，究竟是回到了上古，还是...",
+ "lastChapter":"第一千八百二十二章 遮天大结局",
+ "retentionRatio":58.48,
+ "banned":0,
+ "latelyFollower":28858,
+ "wordCount":6352116
+ },
+ com/upload/cover/2015/09/7/1441610920303.jpg",
+ "shortIntro":"以遮天世界为基石，重演遮天大世界。",
+ "lastChapter":"第十章 在路上",
+ "retentionRatio":0,
+ "banned":0,
+ "latelyFollower":32,
+ "wordCount":21816
+ },
+ {
+ "_id":"5799d8f5ff509845459b9557",
+ "hasCp":false,
+ "title":"遮天之第一仙王",
+ "cat":"其它",
+ "author":"hyjx",
+ "site":"faloo",
+ "cover":"/agent/http://img.faloo.com/novel/images/cover/166x235.jpg",
+ "shortIntro":"一块穿梭无穷时空跨越维度次元的玉佩。。。　　 一个只能穿一次的选择。。。",
+ "lastChapter":"第一章 岁月长河见来生",
+ "retentionRatio":0,
+ "banned":-1,
+ "latelyFollower":31,
+ "wordCount":27498
+ ],
+ "ok":true
+ }
+}

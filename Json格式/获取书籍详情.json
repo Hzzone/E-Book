@@ -1,0 +1,37 @@
+{
+    "code": 1,
+    "message": "ok",
+    "data": {
+        "_id": "53115e30173bfacb4904897e",
+        "author": "烟雨江南",
+        "cover": "/agent/http://static.zongheng.com/upload/cover/2016/01/1453257564712.jpg",
+        "creater": "Xiaomi MI 2A",
+        "longIntro": "千夜自困苦中崛起，在背叛中坠落。\r\n自此一个人，一把枪，行在永夜与黎明之间，却走出一段传奇。\r\n若永夜注定是他的命运，那他也要成为主宰的王。",
+        "title": "永夜君王",
+        "cat": "领主贵族",
+        "majorCate": "奇幻",
+        "minorCate": "领主贵族",
+        "currency": 0,
+        "contentType": "txt",
+        "_le": false,
+        "allowMonthly": true,
+        "allowVoucher": true,
+        "allowBeanVoucher": true,
+        "hasCp": true,
+        "postCount": 18711,
+        "latelyFollower": 69145,
+        "followerCount": 2358,
+        "wordCount": 3606560,
+        "serializeWordCount": 1629,
+        "retentionRatio": "43.6",
+        "updated": "2017-05-03T04:34:47.744Z",
+        "isSerial": true,
+        "chaptersCount": 1062,
+        "lastChapter": "卷八 谁将新樽盛旧月 章二五六 血色七星",
+        "gender": [
+            "male"
+        ],
+        "tags": [],
+        "donate": false
+    }
+}
