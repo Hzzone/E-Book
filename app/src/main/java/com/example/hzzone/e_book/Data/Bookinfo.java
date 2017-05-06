@@ -1,4 +1,4 @@
-package com.example.hzzone.e_book;
+package com.example.hzzone.e_book.Data;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.VectorDrawable;

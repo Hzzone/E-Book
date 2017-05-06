@@ -1,204 +1,180 @@
 package com.example.hzzone.e_book;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
+import com.example.hzzone.e_book.Data.BookChapter;
+import com.example.hzzone.e_book.Data.ChapterList;
 import com.example.hzzone.e_book.Spider.Content;
+import com.kymjs.rxvolley.RxVolley;
+import com.kymjs.rxvolley.client.HttpCallback;
+import com.kymjs.rxvolley.toolbox.Loger;
+
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import cn.xfangfang.paperviewlibrary.PaperLayout;
+import cn.xfangfang.paperviewlibrary.PaperView;
 
 
-public class ReadingActivity extends AppCompatActivity implements View.OnClickListener{
+public class ReadingActivity extends AppCompatActivity{
 
     private static final String TAG = "ReadingActivity";
-    //用来更新菜单栏
-//    @Bind(R.id.button1)
-//    Button button1;
-//    @Bind(R.id.button2)
-//    Button button2;
-//    @Bind(R.id.button3)
-//    Button button3;
-//    @Bind(R.id.button4)
-//    Button button4;
-    View bottomView;
-    RadioButton button1;
-    RadioButton button2;
-    RadioButton button3;
-    RadioButton button4;
+    private View bottomView;
+    private RadioButton button1;
+    private RadioButton button2;
+    private RadioButton button3;
+    private RadioButton button4;
     private PopupWindow mBottomPopWindow;
-//    private PopupWindow mTopPopWindow;
-    PageWidget pageWidget;
+    //章节目录遍历
+    private int bookChapterIterator = 0;
+    private PaperView paperView;
+    private ChapterList chapterList;
+    //书的链接
+    String URL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reading);
-        pageWidget = new PageWidget(this);
-        LinearLayout reading_layout = (LinearLayout)findViewById(R.id.activity_reading);
-        reading_layout.addView(pageWidget, LinearLayoutCompat.LayoutParams.MATCH_PARENT,
-                LinearLayoutCompat.LayoutParams.MATCH_PARENT);
-//        button2.setOnClickListener(this);
-//        button3.setOnClickListener(this);
-//        button4.setOnClickListener(this);
         Intent intent = getIntent();
-        String URL = intent.getStringExtra("book_url");
-//        new ReadingTask().execute();
+        URL = intent.getStringExtra("book_url");
+        new ReadingTask().execute();
+        Log.d(TAG, "onCreate: " + URL);
+        initView();
     }
 
-    //活动的点击事件
-    @Override
-    public void onClick(View v){
-        switch (v.getId()){
-            case R.id.button1:
-                Log.d(TAG, "onClick: " + "button1");
-        }
+    private void initView(){
+        paperView = (PaperView) findViewById(R.id.paper_view);
+        paperView.setTextLine(17);
+        paperView.setTextSize(17);
+        paperView.setContentTextColor("#002505");
+        paperView.setInfoTextColor("#8a000000");
 
+//        paperView.setOnPaperViewStateListener(new PaperLayout.StateListener() {
+//            @Override
+//            public void toStart() {
+//                if (bookChapterIterator == 0) {
+//                    Toast.makeText(getBaseContext(), "到头了", Toast.LENGTH_SHORT).show();
+//                }else {
+//                    bookChapterIterator--;
+//                    new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            ChapterList chapterList = Content.getChapterList(URL);
+//                            //获得前一个章节的内容
+//                            final BookChapter chapter = chapterList.getChapters().elementAt(bookChapterIterator);
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    paperView.setText(chapter.getChapter());
+//                                    paperView.setChapterName(chapter.getChapterName());
+//                                }
+//                            });
+//                        }
+//                    }).start();
+//                }
+//            }
+//
+//            @Override
+//            public void toEnd() {
+//                if (bookChapterIterator==chapterList.getChapters().size()-1) {
+//                    Toast.makeText(getBaseContext(), "结束了", Toast.LENGTH_SHORT).show();
+//                }else {
+//                    bookChapterIterator++;
+//                    new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            ChapterList chapterList = Content.getChapterList(URL);
+//                            //获得前一个章节的内容
+//                            final BookChapter chapter = chapterList.getChapters().elementAt(bookChapterIterator);
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    paperView.setText(chapter.getChapter());
+//                                    paperView.setChapterName(chapter.getChapterName());
+//                                }
+//                            });
+//                        }
+//                    }).start();
+//                }
+//            }
+
+//            @Override
+//            public void centerClicked() {
+//                showMenu();
+//                Toast.makeText(getBaseContext(),"点击了中部",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+        RxVolley.get("http://novel.juhe.im/chapters/http%3A%2F%2Fvip.zhuishushenqi.com%2Fchapter%2F56f8da09176d03ac1983f6d7%3Fcv%3D1486473051386", new HttpCallback() {
+            @Override
+            public void onSuccess(String t) {
+                paperView.setText(t);
+            }
+        });
     }
 
-    // 读书
+    // 获得章节目录
     class ReadingTask extends AsyncTask<Void, String, Void> {
 
         @Override
         protected Void doInBackground(Void... params) {
-            String text =
-                    Content.getChapterContent("http://www.biqukan.com/", "http://www.biqukan.com/1_1094/13662709.html").values().toString();
-            deleteCRLFOnce(text);
-            Log.d(TAG, "doInBackground: "+text);
-            publishProgress(text);
+
+            Log.d(TAG, "doInBackground: " + "获得章节目录");
+//            chapterList = Content.getChapterList(URL);
             return null;
         }
-        protected void onProgressUpdate(String... values){
-            //TODO 更新页面
-        }
-
-    }
-    private static String deleteCRLFOnce(String input) {
-
-        input.replace("&nbsp;", "");
-        return input.replaceAll("((\r\n)|\n)[\\s\t ]*(\\1)+", "$1");
 
     }
 
-    class PageWidget extends View{
+    private void showMenu(){
+        bottomView = LayoutInflater.from(ReadingActivity.this).inflate(R.layout.readingbottom, null);
 
-        private static final String TAG = "PageWidget";
-        private int mScreenWidth = 0; // 屏幕宽
-        private int mScreenHeight = 0; // 屏幕高
-
-
-
-        public PageWidget(Context context) {
-            super(context);
-            WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
-            DisplayMetrics metric = new DisplayMetrics();
-            wm.getDefaultDisplay().getMetrics(metric);
-            mScreenWidth = metric.widthPixels;
-            mScreenHeight = metric.heightPixels;
-            Log.d(TAG, "PageWidget: " + mScreenHeight + " " + mScreenWidth);
-        }
-
-        @Override
-        protected void onDraw(Canvas canvas){
-            super.onDraw(canvas);
-        }
-
-
-        /**
-         * 监控屏幕点击事件
-         */
-        @Override
-        public boolean onTouchEvent(MotionEvent event) {
-            super.onTouchEvent(event);
-            int x = (int)event.getX();
-            int y = (int)event.getY();
-            //防止onTouchEvent点下和离开
-            if (event.getAction() == MotionEvent.ACTION_UP) {
-                Log.d(TAG, "onTouchEvent: " + x + " " + y);
-                if (x > mScreenWidth / 5 && x < mScreenWidth * 4 / 5 && y > mScreenHeight / 3 && y < mScreenHeight * 2 / 3) {
-                    //TODO 点击中央时出现顶部与底部菜单栏
-//                    View topView = LayoutInflater.from(ReadingActivity.this).inflate(R.layout.readingtop, null);
-                    bottomView = LayoutInflater.from(ReadingActivity.this).inflate(R.layout.readingbottom, null);
-//                    final View topView = LayoutInflater.from(ReadingActivity.this).inflate(R.layout.readingtop, null);
-
-                    mBottomPopWindow = new PopupWindow(bottomView,
-                            LinearLayoutCompat.LayoutParams.MATCH_PARENT,
-                            LinearLayoutCompat.LayoutParams.WRAP_CONTENT, true);
-//                    mTopPopWindow = new PopupWindow(topView,
-//                            LinearLayoutCompat.LayoutParams.MATCH_PARENT,
-//                            LinearLayoutCompat.LayoutParams.WRAP_CONTENT, true);
-//                    mTopPopWindow.setTouchable(true);
-//                    mTopPopWindow.setOutsideTouchable(true);
-//                    mTopPopWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
-//                    mTopPopWindow.showAtLocation(pageWidget, Gravity.TOP, 0, 0);
-                    mBottomPopWindow.setTouchable(true);
-                    mBottomPopWindow.setOutsideTouchable(true);
-                    mBottomPopWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
-                    mBottomPopWindow.showAtLocation(pageWidget, Gravity.BOTTOM, 0, 0);
-                    button1 = (RadioButton) bottomView.findViewById(R.id.button1);
-                    button1.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Log.d(TAG, "onClick: "+"button1");
-                        }
-                    });
-                    button2 = (RadioButton) bottomView.findViewById(R.id.button1);
-                    button2.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Log.d(TAG, "onClick: "+"button2");
-                        }
-                    });
-                    button3 = (RadioButton) bottomView.findViewById(R.id.button1);
-                    button3.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Log.d(TAG, "onClick: "+"button3");
-                        }
-                    });
-                    button4 = (RadioButton) bottomView.findViewById(R.id.button1);
-                    button4.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Log.d(TAG, "onClick: "+"button3");
-                        }
-                    });
-                    // 顶部消失时底部同时消失
-//                    mTopPopWindow.setOnDismissListener(new android.widget.PopupWindow.OnDismissListener(){
-//                        public void onDismiss() {
-//                            mBottomPopWindow.dismiss();
-//                        }
-//
-//                    });
-//                    mBottomPopWindow.setOnDismissListener(new android.widget.PopupWindow.OnDismissListener(){
-//                        public void onDismiss() {
-//                            mTopPopWindow.dismiss();
-//                        }
-//
-//                    });
-                    Log.d(TAG, "onTouchEvent: " + "Clicked center");
-                } else if (x < mScreenWidth / 2) {
-                    //TODO 点击了屏幕左边
-                    Log.d(TAG, "onTouchEvent: " + "Clicked left");
-                } else {
-                    //TODO 点击了屏幕右边
-                    Log.d(TAG, "onTouchEvent: " + "Clicked right");
-                }
+        mBottomPopWindow = new PopupWindow(bottomView,
+                LinearLayoutCompat.LayoutParams.MATCH_PARENT,
+                LinearLayoutCompat.LayoutParams.WRAP_CONTENT, true);
+        mBottomPopWindow.setTouchable(true);
+        mBottomPopWindow.setOutsideTouchable(true);
+        mBottomPopWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
+        mBottomPopWindow.showAtLocation(paperView, Gravity.BOTTOM, 0, 0);
+        button1 = (RadioButton) bottomView.findViewById(R.id.button1);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: "+"button1");
             }
-            return true;
-        }
+        });
+        button2 = (RadioButton) bottomView.findViewById(R.id.button1);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: "+"button2");
+            }
+        });
+        button3 = (RadioButton) bottomView.findViewById(R.id.button1);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: "+"button3");
+            }
+        });
+        button4 = (RadioButton) bottomView.findViewById(R.id.button1);
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: "+"button3");
+            }
+        });
     }
 }

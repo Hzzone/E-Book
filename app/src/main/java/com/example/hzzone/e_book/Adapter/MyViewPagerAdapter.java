@@ -1,4 +1,4 @@
-package com.example.hzzone.e_book;
+package com.example.hzzone.e_book.Adapter;
 
 import android.support.v4.view.PagerAdapter;
 import android.view.View;

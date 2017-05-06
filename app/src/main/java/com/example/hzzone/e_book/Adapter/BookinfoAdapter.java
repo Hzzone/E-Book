@@ -1,4 +1,4 @@
-package com.example.hzzone.e_book;
+package com.example.hzzone.e_book.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.hzzone.e_book.Data.Bookinfo;
+import com.example.hzzone.e_book.R;
+
 import java.util.Vector;
 
 /**

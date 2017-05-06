@@ -1,9 +1,7 @@
 package com.example.hzzone.e_book;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,14 +16,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
+
+import com.example.hzzone.e_book.Adapter.BookinfoAdapter;
+import com.example.hzzone.e_book.Adapter.MyViewPagerAdapter;
+import com.example.hzzone.e_book.Data.Bookinfo;
 import com.example.hzzone.e_book.Spider.*;
 
 
@@ -99,11 +98,8 @@ public class MainActivity extends AppCompatActivity {
         bookshelf_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(MainActivity.this, books.get(position).getBookName(), Toast.LENGTH_LONG).show();
                 Bookinfo book = books.get(position);
                 Intent intent = new Intent(MainActivity.this, ReadingActivity.class);
-                intent.putExtra("book_intro", book.getBookIntro());
-                intent.putExtra("book_name", book.getBookName());
                 intent.putExtra("book_url", book.getBookURL());
                 startActivity(intent);
             }
@@ -190,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
         //TODO 书架的数据库存取和小说更新的爬取
         @Override
         protected Boolean doInBackground(Void... params) {
-            Bookinfo book = Content.getBookinfo(URL, "一念永恒");
+            Bookinfo book = Content.getBookinfo("一念永恒");
             books.add(book);
             books.add(new Bookinfo("1", "2", "http://www.biqukan.com/1_1094/", book.getPic()));
             books.add(new Bookinfo("2", "2", "http://www.biqukan.com/1_1094/", book.getPic()));
