@@ -2,20 +2,20 @@ package com.example.hzzone.e_book.Data;
 
 import android.graphics.Bitmap;
 
+import org.litepal.annotation.Column;
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by Hzzone on 2017/5/7.
  */
 
-public class Book {
+public class Book extends DataSupport{
+    @Column(unique = true, nullable = false)
     private String book_ID;
+    @Column(defaultValue = "567d3108092159dc71ad4ec8")
     private String book_resource_ID;
-    private String cover_URL;
-    private Bitmap cover;
-    private String book_name;
 
-    public Book(String book_ID, String book_resource_ID,
-                String cover_URL, String book_name,
-                String author, String last_chapter) {
+    public Book(String book_ID, String book_resource_ID, String cover_URL, String book_name, String author, String last_chapter) {
         this.book_ID = book_ID;
         this.book_resource_ID = book_resource_ID;
         this.cover_URL = cover_URL;
@@ -24,18 +24,11 @@ public class Book {
         this.last_chapter = last_chapter;
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "book_ID='" + book_ID + '\'' +
-                ", book_resource_ID='" + book_resource_ID + '\'' +
-                ", cover_URL='" + cover_URL + '\'' +
-                ", cover=" + cover +
-                ", book_name='" + book_name + '\'' +
-                ", author='" + author + '\'' +
-                ", last_chapter='" + last_chapter + '\'' +
-                '}';
-    }
+    private String cover_URL;
+    @Column(nullable = false)
+    private String book_name;
+
+
 
     public String getBook_ID() {
         return book_ID;
@@ -61,12 +54,16 @@ public class Book {
         this.cover_URL = cover_URL;
     }
 
-    public Bitmap getCover() {
-        return cover;
-    }
-
-    public void setCover(Bitmap cover) {
-        this.cover = cover;
+    @Override
+    public String toString() {
+        return "Book{" +
+                "book_ID='" + book_ID + '\'' +
+                ", book_resource_ID='" + book_resource_ID + '\'' +
+                ", cover_URL='" + cover_URL + '\'' +
+                ", book_name='" + book_name + '\'' +
+                ", author='" + author + '\'' +
+                ", last_chapter='" + last_chapter + '\'' +
+                '}';
     }
 
     public String getBook_name() {

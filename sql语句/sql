@@ -1,0 +1,1 @@
+inset into book(author, book_id, book_name, book_resource_id, cover_url, last_chapter,cover) values('辰东','50864bf69dacd30e3a000014','遮天','56f8da09176d03ac1983f6cd','/agent/http://image.cmfu.com/books/1735921/1735921.jpg', '第一千八百二十二章 遮天大结局','') 

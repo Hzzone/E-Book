@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/activity_reading">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <cn.xfangfang.paperviewlibrary.PaperView
         android:id="@+id/paper_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:textSize="16sp"
         app:textLine="15"/>
-</LinearLayout>
+</RelativeLayout>

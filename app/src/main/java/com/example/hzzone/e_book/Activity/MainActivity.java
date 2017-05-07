@@ -1,6 +1,8 @@
 package com.example.hzzone.e_book.Activity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -28,6 +30,8 @@ import com.example.hzzone.e_book.Adapter.BookAdapter;
 import com.example.hzzone.e_book.Data.Book;
 import com.example.hzzone.e_book.R;
 
+import org.litepal.LitePal;
+
 import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity{
@@ -36,14 +40,17 @@ public class MainActivity extends AppCompatActivity{
     private BookAdapter bookAdapter;
     private SwipeMenuListView listView;
     private SwipeRefreshLayout swipeRefreshLayout; //下拉刷新
+    Vector<Book> books = new Vector<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //创建数据库
+        SQLiteDatabase db = LitePal.getDatabase();
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
         initView();
         initSwipe();
     }
@@ -76,15 +83,6 @@ public class MainActivity extends AppCompatActivity{
         };
 
 // set creator
-        Vector<Book> books = new Vector<>();
-        books.add(new Book("minorCate", "minorCate", "minorCate", "minorCate", "minorCate", "minorCate"));
-        books.add(new Book("minorCate", "minorCate", "minorCate", "minorCate", "minorCate", "minorCate"));
-        books.add(new Book("minorCate", "minorCate", "minorCate", "minorCate", "minorCate", "minorCate"));
-        books.add(new Book("minorCate", "minorCate", "minorCate", "minorCate", "minorCate", "minorCate"));
-        books.add(new Book("minorCate", "minorCate", "minorCate", "minorCate", "minorCate", "minorCate"));
-        books.add(new Book("minorCate", "minorCate", "minorCate", "minorCate", "minorCate", "minorCate"));
-        books.add(new Book("minorCate", "minorCate", "minorCate", "minorCate", "minorCate", "minorCate"));
-        books.add(new Book("minorCate", "minorCate", "minorCate", "minorCate", "minorCate", "minorCate"));
         listView.setMenuCreator(creator);
         bookAdapter = new BookAdapter(MainActivity.this, R.layout.bookinfo, books);
         listView.setAdapter(bookAdapter);
@@ -92,7 +90,10 @@ public class MainActivity extends AppCompatActivity{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Book book = books.get(position);
+                Intent intent = new Intent(MainActivity.this, ReadingActivity.class);
+//                intent.putExtra("book_url", book.getBookURL());
+                startActivity(intent);
             }
         });
         //点击侧滑菜单的事件
@@ -142,5 +143,6 @@ public class MainActivity extends AppCompatActivity{
         }
 
     };
+
 
 }

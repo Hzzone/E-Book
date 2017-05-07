@@ -26,7 +26,7 @@ public class Content {
     }
 
     //通过bookid获得书源列表
-    public List<BookResource>getBookResource() {
+    public List<BookResource> getBookResource() {
         List<BookResource> bookResources = new ArrayList<BookResource>();
         try{
              bookResources = JSON.parseArray(getData(),
@@ -54,10 +54,10 @@ public class Content {
 
     //通过章节id获取章节内容，形式为http://novel.juhe.im/chapters/http%3A%2F%2Fvip.zhuishushenqi.com%2Fchapter%2F + id + %3Fcv%3D1486473051386
 
-    public String getChapterContent() {
+    public ChapterContent getChapterContent() {
         try{
             return JSON.parseObject(JSON.parseObject(getData(), OutsideChapterContent.class).getChapter()
-                    , ChapterContent.class).getCpContent();
+                    , ChapterContent.class);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -76,6 +76,17 @@ public class Content {
             Gson gson = new Gson();
             bookResults = gson.fromJson(s, new TypeToken<List<SearchResult>>() {}.getType());
             return bookResults;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //TODO 如果没有搜索到，对异常进行处理
+        return null;
+    }
+
+    //通过bookid获得小说的介绍详情
+    public BookDetails getBookDetails(){
+        try{
+            return JSON.parseObject(getData(), BookDetails.class);
         }catch (Exception e){
             e.printStackTrace();
         }
