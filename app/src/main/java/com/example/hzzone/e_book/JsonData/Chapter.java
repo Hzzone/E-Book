@@ -1,10 +1,12 @@
 package com.example.hzzone.e_book.JsonData;
 
+import java.io.Serializable;
+
 /**
  * Created by Hzzone on 2017/5/6.
  */
 
-public class Chapter {
+public class Chapter implements Serializable{
     private String id;
     private String title;
     private String link;

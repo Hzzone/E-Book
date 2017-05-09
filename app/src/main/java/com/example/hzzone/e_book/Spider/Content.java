@@ -1,5 +1,7 @@
 package com.example.hzzone.e_book.Spider;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
 import com.example.hzzone.e_book.JsonData.*;
 import com.google.gson.Gson;
@@ -38,13 +40,15 @@ public class Content {
         return null;
     }
 
-    //通过书源获得书籍章节列表，形如http://novel.juhe.im/book-chapters/+bookid
+    //通过书源获得书籍章节列表，形如http://novel.juhe.im/book-chapters/+source id
     public List<Chapter> getBookChapterList() {
         List<Chapter> bookChapterList = new ArrayList<Chapter>();
         try{
             GetChapterList getChapterList = JSON.parseObject(getData(),
                     GetChapterList.class);
+            System.out.println(getChapterList.toString());
             bookChapterList = JSON.parseArray(getChapterList.getChapters(), Chapter.class);
+            System.out.println(bookChapterList.get(0).toString());
             return bookChapterList;
         }catch (Exception e){
             e.printStackTrace();

@@ -44,4 +44,35 @@ public class GetChapterList {
 
 
     private String chapters;
+    private String updated;
+
+    @Override
+    public String toString() {
+        return "GetChapterList{" +
+                "_id='" + _id + '\'' +
+                ", name='" + name + '\'' +
+                ", link='" + link + '\'' +
+                ", chapters='" + chapters + '\'' +
+                ", updated='" + updated + '\'' +
+                ", host='" + host + '\'' +
+                '}';
+    }
+
+    public String getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(String updated) {
+        this.updated = updated;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    private String host;
 }

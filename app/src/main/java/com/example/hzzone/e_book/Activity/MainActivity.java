@@ -6,20 +6,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.AdapterView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
@@ -31,8 +23,10 @@ import com.example.hzzone.e_book.Data.Book;
 import com.example.hzzone.e_book.R;
 
 import org.litepal.LitePal;
+import org.litepal.crud.DataSupport;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -40,13 +34,17 @@ public class MainActivity extends AppCompatActivity{
     private BookAdapter bookAdapter;
     private SwipeMenuListView listView;
     private SwipeRefreshLayout swipeRefreshLayout; //下拉刷新
-    Vector<Book> books = new Vector<>();
+    List<Book> books = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //创建数据库
         SQLiteDatabase db = LitePal.getDatabase();
+        //初始化数据库
+        initDatabase();
+        //从数据库中读取所有的书籍
+        books = DataSupport.findAll(Book.class);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -91,8 +89,10 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Book book = books.get(position);
+                //启动阅读事件，并传递书源id
                 Intent intent = new Intent(MainActivity.this, ReadingActivity.class);
-//                intent.putExtra("book_url", book.getBookURL());
+                intent.putExtra("book_resource_url", book.getBook_resource_ID());
+                Log.d(TAG, "onItemClick: "+book.getBook_resource_ID());
                 startActivity(intent);
             }
         });
@@ -103,6 +103,10 @@ public class MainActivity extends AppCompatActivity{
                 switch (index) {
                     case 0:
                         // delete
+                        books.remove(position);
+                        for(Book book:books)
+                            book.save();
+                        bookAdapter.notifyDataSetChanged();
                         break;
                 }
                 // false : close the menu; true : not close the menu
@@ -145,4 +149,41 @@ public class MainActivity extends AppCompatActivity{
     };
 
 
+    private void initDatabase(){
+        Book book = DataSupport.find(Book.class, 1);
+        book.setBook_resource_ID("http://novel.juhe.im/book-chapters/56f8da09176d03ac1983f6cd");
+        book.save();
+//        new Book("50864bf69dacd30e3a000014",
+//                "http://novel.juhe.im/book-chapters/56f8da09176d03ac1983f6cd",
+//                "http://image.cmfu.com/books/1735921/1735921.jpg",
+//                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
+//        new Book("50864bf69dacd30e3a000014",
+//                "56f8da09176d03ac1983f6cd",
+//                "http://image.cmfu.com/books/1735921/1735921.jpg",
+//                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
+//        new Book("50864bf69dacd30e3a000014",
+//                "56f8da09176d03ac1983f6cd",
+//                "http://image.cmfu.com/books/1735921/1735921.jpg",
+//                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
+//        new Book("50864bf69dacd30e3a000014",
+//                "56f8da09176d03ac1983f6cd",
+//                "http://image.cmfu.com/books/1735921/1735921.jpg",
+//                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
+//        new Book("50864bf69dacd30e3a000014",
+//                "56f8da09176d03ac1983f6cd",
+//                "http://image.cmfu.com/books/1735921/1735921.jpg",
+//                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
+//        new Book("50864bf69dacd30e3a000014",
+//                "56f8da09176d03ac1983f6cd",
+//                "http://image.cmfu.com/books/1735921/1735921.jpg",
+//                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
+//        new Book("50864bf69dacd30e3a000014",
+//                "56f8da09176d03ac1983f6cd",
+//                "http://image.cmfu.com/books/1735921/1735921.jpg",
+//                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
+//        new Book("50864bf69dacd30e3a000014",
+//                "56f8da09176d03ac1983f6cd",
+//                "http://image.cmfu.com/books/1735921/1735921.jpg",
+//                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
+    }
 }

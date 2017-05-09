@@ -86,6 +86,7 @@ public class BookDetails {
     }
 
     public String getCover() {
+        cover.replaceFirst("/agent/", "");
         return cover;
     }
 

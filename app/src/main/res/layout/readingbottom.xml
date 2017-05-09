@@ -48,11 +48,23 @@
         android:layout_centerInParent="true"
         android:button="@null"
         android:drawableTop="@mipmap/ic_launcher"
-        android:text="@string/readingbottom4"
+        android:text="书源"
         android:textColor="@color/colorSearch"
         android:layout_gravity="center"
         android:textAlignment="center"
         android:id="@+id/button4"/>
+    <RadioButton
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_centerInParent="true"
+        android:button="@null"
+        android:drawableTop="@mipmap/ic_launcher"
+        android:text="@string/readingbottom4"
+        android:textColor="@color/colorSearch"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:id="@+id/button5"/>
 
 
 </LinearLayout>

@@ -47,6 +47,7 @@ public class Book extends DataSupport{
     }
 
     public String getCover_URL() {
+        cover_URL.replaceFirst("/agent/", "");
         return cover_URL;
     }
 

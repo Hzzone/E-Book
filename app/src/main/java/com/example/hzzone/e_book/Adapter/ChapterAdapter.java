@@ -9,27 +9,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hzzone.e_book.Data.Book;
+import com.example.hzzone.e_book.JsonData.Chapter;
 import com.example.hzzone.e_book.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-
 /**
  * Created by Hzzone on 2017/5/7.
  */
 
-public class BookAdapter extends ArrayAdapter<Book> {
+public class ChapterAdapter extends ArrayAdapter<Chapter> {
     private int resourceID;
 
-    public BookAdapter(Context context, int ViewResourceID,
-                           List<Book> objects){
+    public ChapterAdapter(Context context, int ViewResourceID,
+                       List<Chapter> objects){
         super(context, ViewResourceID, objects);
         resourceID = ViewResourceID;
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Book book = getItem(position);
+        Chapter chapter = getItem(position);
         View view;
         //利用缓存提高效率
         if(convertView==null){
@@ -38,13 +38,8 @@ public class BookAdapter extends ArrayAdapter<Book> {
         }else {
             view = convertView;
         }
-        //TODO 设置列表显示
-        Picasso.with(view.getContext()).load(book.getCover_URL()).into(
-            (ImageView) view.findViewById(R.id.bookinfo_img)
-        );
-        ((TextView)view.findViewById(R.id.book_author)).setText(book.getAuthor());
-        ((TextView)view.findViewById(R.id.book_latest_chapter)).setText(book.getLast_chapter());
-        ((TextView)view.findViewById(R.id.book_name)).setText(book.getBook_name());
+        //TODO 设置列表显示章节目录
+        ((TextView)view.findViewById(R.id._chapter)).setText(chapter.getTitle());
 
         return view;
     }
