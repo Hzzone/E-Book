@@ -7,8 +7,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity{
     private SwipeMenuListView listView;
     private SwipeRefreshLayout swipeRefreshLayout; //下拉刷新
     List<Book> books = new ArrayList<>();
+    private SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity{
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        searchView = (SearchView)findViewById(R.id.search_view);
         setSupportActionBar(toolbar);
         initView();
         initSwipe();
@@ -153,8 +158,7 @@ public class MainActivity extends AppCompatActivity{
         Book book = DataSupport.find(Book.class, 1);
         book.setBook_resource_ID("http://novel.juhe.im/book-chapters/56f8da09176d03ac1983f6cd");
         book.save();
-//        new Book("50864bf69dacd30e3a000014",
-//                "http://novel.juhe.im/book-chapters/56f8da09176d03ac1983f6cd",
+//        new Book("50864bf69dacd30e3a000014", "http://novel.juhe.im/book-chapters/56f8da09176d03ac1983f6cd",
 //                "http://image.cmfu.com/books/1735921/1735921.jpg",
 //                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
 //        new Book("50864bf69dacd30e3a000014",
@@ -185,5 +189,15 @@ public class MainActivity extends AppCompatActivity{
 //                "56f8da09176d03ac1983f6cd",
 //                "http://image.cmfu.com/books/1735921/1735921.jpg",
 //                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
+    }
+    //toolbar的检测事件
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        MenuItem item = menu.findItem(R.id.action_search);
+//        searchView.setMenuItem(item);
+
+        return true;
     }
 }

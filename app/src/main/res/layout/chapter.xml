@@ -7,7 +7,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="章节目录"
-        android:gravity="center"
+        android:gravity=""
+        android:layout_marginLeft="10dp"
         android:textSize="20sp"
+        android:textStyle="bold"
         android:id="@+id/_chapter"/>
 </LinearLayout>
