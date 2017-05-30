@@ -99,7 +99,6 @@ public class MainActivity extends AppCompatActivity{
                 intent.putExtra("book_resource_url", book.getBook_resource_ID());
                 Log.d(TAG, "onItemClick: "+book.getBook_resource_ID());
                 startActivity(intent);
-                String s  = "this "
             }
         });
         //点击侧滑菜单的事件
@@ -156,12 +155,12 @@ public class MainActivity extends AppCompatActivity{
 
 
     private void initDatabase(){
-        Book book = DataSupport.find(Book.class, 1);
-        book.setBook_resource_ID("http://novel.juhe.im/book-chapters/56f8da09176d03ac1983f6cd");
-        book.save();
-//        new Book("50864bf69dacd30e3a000014", "http://novel.juhe.im/book-chapters/56f8da09176d03ac1983f6cd",
-//                "http://image.cmfu.com/books/1735921/1735921.jpg",
-//                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
+//        Book book = DataSupport.find(Book.class, 1);
+//        book.setBook_resource_ID("http://novel.juhe.im/book-chapters/56f8da09176d03ac1983f6cd");
+//        book.save();
+        new Book("50864bf69dacd30e3a000014", "http://novel.juhe.im/book-chapters/56f8da09176d03ac1983f6cd",
+                "http://image.cmfu.com/books/1735921/1735921.jpg",
+                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
     }
     //toolbar的检测事件
     @Override
