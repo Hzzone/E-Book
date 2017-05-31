@@ -37,8 +37,7 @@ public class MainActivity extends AppCompatActivity{
     private BookAdapter bookAdapter;
     private SwipeMenuListView listView;
     private SwipeRefreshLayout swipeRefreshLayout; //下拉刷新
-    List<Book> books = new ArrayList<>();
-    private SearchView searchView;
+    private List<Book> books = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity{
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        searchView = (SearchView)findViewById(R.id.search_view);
+//        searchView = (searchViewSearchView)findViewById(R.id.search_view);
         setSupportActionBar(toolbar);
         initView();
         initSwipe();
@@ -162,14 +161,13 @@ public class MainActivity extends AppCompatActivity{
                 "http://image.cmfu.com/books/1735921/1735921.jpg",
                 "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
     }
-    //toolbar的检测事件
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-
-        MenuItem item = menu.findItem(R.id.action_search);
-//        searchView.setMenuItem(item);
-
-        return true;
-    }
+//    //toolbar的检测事件
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.main, menu);
+//
+//        MenuItem item = menu.findItem(R.id.action_search);
+//
+//        return true;
+//    }
 }
