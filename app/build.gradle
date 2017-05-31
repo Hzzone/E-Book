@@ -56,6 +56,6 @@ dependencies {
     compile 'com.example.zhouwei.library:library:1.0.0'
     compile 'com.github.shem8:material-login:2.1.1'
     testCompile 'junit:junit:4.12'
-    compile 'com.miguelcatalan:materialsearchview:1.4.0'
     debugCompile 'com.amitshekhar.android:debug-db:1.0.0'
+    compile 'com.miguelcatalan:materialsearchview:1.4.0'
 }

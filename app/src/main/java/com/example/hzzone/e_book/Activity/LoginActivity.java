@@ -34,10 +34,10 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser.setError("");
 
                 //TODO 密码验证
-//                if (!pass.equals(user)) {
-//                    loginPass.setError("Wrong password");
-//                    return;
-//                }
+                if (user_name!="1@qq.com"&&user_passwd!="1234") {
+                    loginPass.setError("Wrong password");
+                    return;
+                }
                 loginPass.setError("");
 
                 Snackbar.make(login, "登录成功", Snackbar.LENGTH_LONG).show();
