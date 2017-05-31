@@ -1,25 +1,48 @@
 from flask import Flask
 from flask import request
+import psycopg2
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
-def home():
-    return '<h1>Home</h1>'
+conn = psycopg2.connect(database="Hzzone",
+    host="127.0.0.1",
+    port="5432",
+    user="",
+    password="")
+cursor = conn.cursor()
+# conn.select_db('ebook')
 
-@app.route('/signin', methods=['GET'])
+
+@app.route('/login', methods=['GET'])
 def signin_form():
-    return '''<form action="/signin" method="post">
-              <p><input name="username"></p>
-              <p><input name="password" type="password"></p>
+    return '''<form action="/login" method="post">
+              <p><input name="user_account"></p>
+              <p><input name="user_password" type="password"></p>
               <p><button type="submit">Sign In</button></p>
               </form>'''
 
-@app.route('/signin', methods=['POST'])
-def signin():
-    if request.form['username']=='admin' and request.form['password']=='password':
-        return '<h3>Hello, admin!</h3>'
-    return '<h3>Bad username or password.</h3>'
+@app.route('/login', methods=['POST'])
+def login():
+    user_account =  request.form['user_account']
+    user_password = request.form['user_password']
+    # operate the database
+    current_user = cursor.execute("select * from user where current_user=%s"%user_account)
+    print current_user
+    if user_password==current_user[2]:
+        return '<p>home</p>'
+        # return 'login_success'
+    # return 'login_failed'
+    return "<p>h</p>"
+
+
+@app.route('/register', methods=['POST'])
+def register():
+    user_account =  request.form['user_account']
+    user_password = request.form['user_password']
+    # operate the database
+    if True:
+        return 'register_success'
+    return 'register_failed'
 
 if __name__ == '__main__':
     app.run()
