@@ -24,6 +24,34 @@ public class User extends DataSupport{
     public String toString() {
         return "User{" +
                 "user_account='" + user_account + '\'' +
+//        new Book("50864bf69dacd30e3a000014",
+//                "56f8da09176d03ac1983f6cd",
+//                "http://image.cmfu.com/books/1735921/1735921.jpg",
+//                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
+//        new Book("50864bf69dacd30e3a000014",
+//                "56f8da09176d03ac1983f6cd",
+//                "http://image.cmfu.com/books/1735921/1735921.jpg",
+//                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
+//        new Book("50864bf69dacd30e3a000014",
+//                "56f8da09176d03ac1983f6cd",
+//                "http://image.cmfu.com/books/1735921/1735921.jpg",
+//                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
+//        new Book("50864bf69dacd30e3a000014",
+//                "56f8da09176d03ac1983f6cd",
+//                "http://image.cmfu.com/books/1735921/1735921.jpg",
+//                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
+//        new Book("50864bf69dacd30e3a000014",
+//                "56f8da09176d03ac1983f6cd",
+//                "http://image.cmfu.com/books/1735921/1735921.jpg",
+//                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
+//        new Book("50864bf69dacd30e3a000014",
+//                "56f8da09176d03ac1983f6cd",
+//                "http://image.cmfu.com/books/1735921/1735921.jpg",
+//                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
+//        new Book("50864bf69dacd30e3a000014",
+//                "56f8da09176d03ac1983f6cd",
+//                "http://image.cmfu.com/books/1735921/1735921.jpg",
+//                "遮天", "辰东", "第一千八百二十二章 遮天大结局").save();
                 ", user_password='" + user_password + '\'' +
                 ", user_name='" + user_name + '\'' +
                 '}';
